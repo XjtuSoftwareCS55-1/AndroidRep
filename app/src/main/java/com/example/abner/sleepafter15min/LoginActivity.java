@@ -1,5 +1,6 @@
 package com.example.abner.sleepafter15min;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.abner.sleepafter15min.DAO.UserDO;
+import com.example.abner.sleepafter15min.DAO.WebServer;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -20,31 +26,47 @@ import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
     private Button btn;
+    private EditText userIdInput;
+    private EditText passwdInput;
+    private String url;
+    private Intent intent;
+    private Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.login );
+        initData();
 //        Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar );
 //        setSupportActionBar( toolbar );
-
+        url = WebServer.getSite();
         btn = (Button) findViewById( R.id.SignInButton );
+        userIdInput = findViewById( R.id.userIdInput );
+        passwdInput = findViewById( R.id.passwdInput );
         btn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String userId = userIdInput.getText().toString();
+                String passwd = passwdInput.getText().toString();
+                new WebTask().execute( url, userId, passwd);
+                setResult(RESULT_OK,intent);
+//                finish();
             }
         } );
 
     }
 
+    private void initData(){
+        intent=this.getIntent();
+        bundle=intent.getExtras();
+    }
 
 
     class WebTask extends AsyncTask{
         @Override
         protected Object doInBackground(Object[] objects) {
-            String userId = objects[0].toString();
-            String password = objects[1].toString();
-            String path = objects[2].toString();
+            String path = objects[0].toString();
+            String userId = objects[1].toString();
+            String password = objects[2].toString();
             try{
                 URL url = new URL( path +"?UserId=" + userId + "&password="+password );
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -62,6 +84,8 @@ public class LoginActivity extends AppCompatActivity {
                     String s = br.readLine();
                     //返回读出的每一行的数据
                     return s;
+                } else {
+                    return "Warning";
                 }
             }catch (Exception e){
                 e.printStackTrace();
@@ -75,6 +99,21 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(o);
             //获取Android studio与web后台数据交互获得的值
             String s= (String) o;
+            if (null != o){
+                Toast.makeText( LoginActivity.this, s,Toast.LENGTH_LONG ).show();
+                // 给bnt1添加点击响应事件
+                Intent intent =new Intent(LoginActivity.this,MainActivity.class);
+                //启动
+                startActivity(intent);
+            }else {
+//                Intent intent =new Intent(LoginActivity.this,MainActivity.class);
+                bundle=new Bundle();
+                bundle.putSerializable("user",new UserDO("1223","Abenr"));
+                intent.putExtras( bundle );
+                //启动
+//                startActivity(intent);
+                finish();
+            }
 
         }
     }

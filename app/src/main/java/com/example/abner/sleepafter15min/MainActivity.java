@@ -1,5 +1,6 @@
 package com.example.abner.sleepafter15min;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,8 +9,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.example.abner.sleepafter15min.DAO.UserDO;
 
 public class MainActivity extends AppCompatActivity {
+    private UserDO userDO = null;
+    //token  登录返回的凭证
+//    private Token token;
+    TextView textView;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult( requestCode, resultCode, data );
+        if(resultCode==RESULT_OK){//如果是返回的标识
+            //获取数据
+            Bundle bundle=data.getExtras();
+           userDO = (UserDO) bundle.getSerializable( "user" );
+            //保留之前的数据
+            textView.setText( "Hello, "+ userDO.getNickname() );
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +38,21 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar );
         setSupportActionBar( toolbar );
 
+        textView = (TextView)findViewById( R.id.hello );
+        if(null != userDO){
+            textView.setText( "Hello, "+ userDO.getNickname() );
+        }
+
         FloatingActionButton fab = (FloatingActionButton) findViewById( R.id.fab );
         fab.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make( view, "Replace with your own action", Snackbar.LENGTH_LONG )
                         .setAction( "Action", null ).show();
+
+                Intent intent = new Intent( MainActivity.this,LoginActivity.class );
+//                startActivity( intent );
+                startActivityForResult(intent,0);
             }
         } );
     }
