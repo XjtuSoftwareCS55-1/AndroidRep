@@ -9,4 +9,10 @@ public class WebServer {
     public static String getSite(){
         return site;
     }
+    public static String getUser(){
+        return site + "/user";
+    }
+    public static  String getSignUp() {
+        return site + "/user/add";
+    }
 }

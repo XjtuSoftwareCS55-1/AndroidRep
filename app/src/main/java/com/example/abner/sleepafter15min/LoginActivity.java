@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.abner.sleepafter15min.DAO.UserDO;
@@ -26,11 +27,25 @@ import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
     private Button btn;
+    private TextView btn_sign_up;
     private EditText userIdInput;
     private EditText passwdInput;
     private String url;
     private Intent intent;
     private Bundle bundle;
+    private UserDO userDO = null;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult( requestCode, resultCode, data );
+        if(resultCode == RESULT_OK){//如果是返回的标识
+            //获取数据
+            Bundle bundle=data.getExtras();
+            userDO = (UserDO) bundle.getSerializable( "user" );
+            //保留之前的数据
+            userIdInput.setText( userDO.getUserId() );
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -40,13 +55,28 @@ public class LoginActivity extends AppCompatActivity {
 //        setSupportActionBar( toolbar );
         url = WebServer.getSite();
         btn = (Button) findViewById( R.id.SignInButton );
+        btn_sign_up = (TextView)findViewById( R.id.Sign_up );
         userIdInput = findViewById( R.id.userIdInput );
         passwdInput = findViewById( R.id.passwdInput );
+        btn_sign_up.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent( LoginActivity.this, SignUpActivity.class );
+                startActivityForResult( in , 0);
+            }
+        } );
         btn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String userId = userIdInput.getText().toString();
                 String passwd = passwdInput.getText().toString();
+                if("".equals( userId ) ){
+                    Toast.makeText( LoginActivity.this,"Id不能为空",Toast.LENGTH_LONG ).show();
+                    return ;
+                } else if("".equals( passwd )){
+                    Toast.makeText( LoginActivity.this,"密码不能为空",Toast.LENGTH_LONG ).show();
+                    return ;
+                }
                 new WebTask().execute( url, userId, passwd);
                 setResult(RESULT_OK,intent);
 //                finish();
