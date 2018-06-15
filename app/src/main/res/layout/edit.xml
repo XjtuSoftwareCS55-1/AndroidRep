@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"  
             android:layout_height="wrap_content"  
             android:layout_weight="1"  
-            android:background="@drawable/toumin"  
+            android:background="@mipmap/ic_launcher"
             android:onClick="ju"  
             android:text="diabji" />  
              
