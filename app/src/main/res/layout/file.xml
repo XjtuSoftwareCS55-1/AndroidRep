@@ -13,14 +13,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:textSize="@*android:dimen/list_item_size"
+            android:textSize="15pt"
             android:textColor="@android:color/white"/>
 
         <TextView
             android:id="@+id/item_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@*android:dimen/list_item_size"
+            android:textSize="15pt"
             android:textColor="@android:color/white"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"/>
@@ -31,15 +31,15 @@
         android:background="#09c"/>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ListView
             android:id="@+id/file_list"
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:fadingEdge="none"
-            android:cacheColorHint="@android:color/transparent"/>
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:fadingEdge="none" />
     </LinearLayout>
 </LinearLayout>

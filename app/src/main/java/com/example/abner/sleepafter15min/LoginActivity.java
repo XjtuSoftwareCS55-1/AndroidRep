@@ -99,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
             String password = objects[2].toString();
             try{
                 URL url = new URL( path +"?UserId=" + userId + "&password="+password );
+//                Toast.makeText( LoginActivity.this, url.toString() ,Toast.LENGTH_LONG).show();
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 //设置网络超时时间

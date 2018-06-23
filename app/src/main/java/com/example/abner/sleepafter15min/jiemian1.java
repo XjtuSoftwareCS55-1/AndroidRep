@@ -1,4 +1,4 @@
-package com.example.abner.sleepafter15min.Util;
+package com.example.abner.sleepafter15min;
 
 /**
  * Created by 17917 on 2018/6/23.
@@ -11,9 +11,11 @@ package com.example.abner.sleepafter15min.Util;
         import android.support.v4.app.FragmentTransaction;
         import android.view.View;
         import android.view.View.OnClickListener;
-        import android.widget.ImageView;
         import android.widget.LinearLayout;
         import android.widget.TextView;
+
+        import com.example.abner.sleepafter15min.LoginFragment;
+        import com.example.abner.sleepafter15min.MainActivity;
 
 public class jiemian1 extends FragmentActivity implements OnClickListener {
     // 底部菜单4个Linearlayout
@@ -63,7 +65,7 @@ public class jiemian1 extends FragmentActivity implements OnClickListener {
                 break;
             case 1:
                 if (flunt == null) {
-                    flunt = new flunt();
+                    flunt = new MainActivity.flunt();
                     transaction.add(R.id.fl_content, flunt);
                 } else {
                     transaction.show(flunt);
@@ -121,7 +123,7 @@ public class jiemian1 extends FragmentActivity implements OnClickListener {
         // 底部菜单4个菜单标题
         this.shur = (TextView) findViewById(R.id.shur);
         this.lunt= (TextView) findViewById(R.id.lunt);
-        this.buzhid = (TextView) findViewById(R.id.bzhid);
+//        this.buzhid = (TextView) findViewById(R.id.bzhid);
 
     }
 

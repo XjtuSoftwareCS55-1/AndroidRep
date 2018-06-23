@@ -5,7 +5,7 @@ package com.example.abner.sleepafter15min.DAO;
  */
 
 public class WebServer {
-    private static String site = "";
+    private static String site = "http://47.97.212.158:8080/web";
     public static String getSite(){
         return site;
     }
