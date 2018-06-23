@@ -4,10 +4,67 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/user_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:text="用户名：" />
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="界面1"
+        android:text="欢迎使用"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:textSize="30dp" />
+    
+    <TextView
+        android:id="@+id/zjx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="最近信息："
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:textSize="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_alignBottom="@id/zjx"
+        android:id="@+id/textView" />
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/zjx"
+        android:id="@+id/editText2">
+    </EditText>
+
+    <TextView
+        android:id="@+id/ss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:text="输入"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignStart="@+id/editText2"
+        android:layout_below="@+id/editText2"></EditText>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/user_id"
+        android:text="已使用：  天"
+        android:textSize="20dp"/>
 
 </RelativeLayout>
