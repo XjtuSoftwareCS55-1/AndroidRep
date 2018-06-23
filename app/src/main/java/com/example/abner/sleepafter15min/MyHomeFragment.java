@@ -39,5 +39,6 @@ public class MyHomeFragment extends Fragment {
     }
     public void setUserDO(UserDO userDO){
         this.userDO = userDO;
+        displayInfo();
     }
 }

@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     TextView textView;
     BottomNavigationBar mBottomNavigationBar;
     FloatingActionButton fab;
+    private LoginFragment loginFragment;
+    private MyHomeFragment myHomeFragment;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult( requestCode, resultCode, data );
@@ -50,6 +52,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         if(null != userDO){
             textView.setText( "Hello, "+ userDO.getNickname() );
         }
+        if(null == loginFragment){
+            loginFragment = new LoginFragment();
+
+        }
+        if(null == myHomeFragment){
+            myHomeFragment = new MyHomeFragment();
+        }
         BadgeItem badgeItem = new BadgeItem();
         badgeItem.setHideOnSelect(true)
                 .setText("10")
@@ -68,18 +77,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
         mBottomNavigationBar.setTabSelectedListener(this);
 
-        fab = (FloatingActionButton) findViewById( R.id.fab );
-        fab.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make( view, "Replace with your own action", Snackbar.LENGTH_LONG )
-                        .setAction( "Action", null ).show();
-
-                Intent intent = new Intent( MainActivity.this,LoginActivity.class );
-//                startActivity( intent );
-                startActivityForResult(intent,0);
-            }
-        } );
+//        fab = (FloatingActionButton) findViewById( R.id.fab );
+//        fab.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make( view, "Replace with your own action", Snackbar.LENGTH_LONG )
+//                        .setAction( "Action", null ).show();
+//
+//                Intent intent = new Intent( MainActivity.this,LoginActivity.class );
+////                startActivity( intent );
+//                startActivityForResult(intent,0);
+//            }
+//        } );
     }
 
     @Override
@@ -104,22 +113,36 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         return super.onOptionsItemSelected( item );
     }
 
+
+
+
     @Override
     public void onTabSelected(int position) {
        String str= "init";
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        if(loginFragment.isAdded() == false){
+//            transaction.add(R.id.ll_content, loginFragment);
+//        }
+//        if(myHomeFragment.isAdded() == false){
+//           transaction.add(R.id.ll_content, myHomeFragment);
+//        }
         switch (position) {
             case 0:
-                str = "First Fragment";
+                str = "这是社区";
                 textView.setText( str );
                 break;
             case 1:
-                    str = "2 Fragment";
+//                transaction.hide( myHomeFragment );
+//                transaction.show( loginFragment );
+                    str = "这是空间历史动态";
                 textView.setText( str );
                 break;
             case 2:
-                    str = "3 Fragment";
+                    str = "这是社区";
                 textView.setText( str );
+//               transaction.hide( loginFragment );
+////                myHomeFragment.setUserDO( userDO );
+//               transaction.show( myHomeFragment );
                 break;
             case 3:
 
@@ -128,9 +151,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 //                startActivity( intent );
                     startActivityForResult(intent,0);
                 }else {
-                    MyHomeFragment home = new MyHomeFragment();
-                    transaction.replace(R.id.ll_content, home);
-                    str = "4 Fragment";
+
+//                    myHomeFragment.setUserDO( userDO );
+//                    transaction.hide( loginFragment );
+//                myHomeFragment.setUserDO( userDO );
+//                    transaction.show( myHomeFragment );
+//                    transaction.add(R.id.ll_content, home);
+                    str = "个人信息";
                     textView.setText( str );
                 }
 

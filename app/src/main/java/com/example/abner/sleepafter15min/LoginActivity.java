@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText( LoginActivity.this,"密码不能为空",Toast.LENGTH_LONG ).show();
                     return ;
                 }
-                new WebTask().execute( url, userId, passwd);
+                new WebTask().execute( WebServer.getLogin(), userId, passwd);
                 setResult(RESULT_OK,intent);
 //                finish();
             }
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             String userId = objects[1].toString();
             String password = objects[2].toString();
             try{
-                URL url = new URL( path +"?UserId=" + userId + "&password="+password );
+                URL url = new URL( path +"?userId=" + userId + "&password="+password );
 //                Toast.makeText( LoginActivity.this, url.toString() ,Toast.LENGTH_LONG).show();
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");

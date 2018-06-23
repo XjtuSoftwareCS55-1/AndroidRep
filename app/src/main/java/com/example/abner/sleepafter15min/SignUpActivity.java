@@ -79,7 +79,7 @@ public class SignUpActivity extends AppCompatActivity {
             String nickname = objects[2].toString();
             userDO = new UserDO( userId, nickname );
             try{
-                URL url = new URL( path +"?UserId=" + userId + "&password="+password +"&nickname="+nickname);
+                URL url = new URL( path +"?userId=" + userId + "&password="+password +"&nickname="+nickname);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 //设置网络超时时间

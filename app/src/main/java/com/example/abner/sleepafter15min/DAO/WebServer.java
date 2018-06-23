@@ -9,6 +9,9 @@ public class WebServer {
     public static String getSite(){
         return site;
     }
+    public static String getLogin() {
+        return site + "/user/login";
+    }
     public static String getUser(){
         return site + "/user";
     }
